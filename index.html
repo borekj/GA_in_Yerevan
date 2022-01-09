@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="cs"> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1.0">
+        <meta name="GA and AQ in Yerevan" content="GA and AQ in Yerevan">
+        <title>GA and AQ in Yerevan</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="">
+        
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+        <link rel="stylesheet" type="text/css" href="./style.css">
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        <link rel="stylesheet" href="./leaflet.wmslegend.css"/>
+        <script src="./leaflet.wmslegend.js"></script>
+
+
+
+        <script defer src="script.js"></script>
+        <script defer src="points.js"></script>
+
+    </head> 
+    <body>
+
+      <h1>Green areas and air quality in Yerevan</h1>
+      <br>
+
+      <div class="choose">
+        <button class="button" onclick="ga()">Green Areas</button>
+        <button class="button" onclick="aq()">Air Quality</button>
+        <button class="button" onclick="no()">Latest NO2</button>
+        <button class="button" onclick="so()">Latest S02</button>
+        <button class="button" onclick="ndvi()">Latest NDVI</button>
+        <button class="button" onclick="temp()">Current temperature, wind etc. </button>
+
+      </div>
+    
+      <div class="slidecontainer" id="slidecontainer" style="display:none">        
+        <p>Choose a year:</p>
+        <fieldset class="range__field">
+          <input class="range" id ="range" type="range" min="2011" max="2021" value="1" step="1">
+          <svg role="presentation" width="99%" height="10" xmlns="http://www.w3.org/2000/svg">
+              <rect class="range__tick" x="0%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="10%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="20%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="30%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="40%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="50%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="60%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="70%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="80%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="90%" y="3" width="1" height="10"></rect>
+              <rect class="range__tick" x="100%" y="3" width="1" height="10"></rect>
+          </svg>
+          <svg role="presentation" width="100%" height="14" xmlns="http://www.w3.org/2000/svg">
+              <text class="range__point" x="0%" y="14" text-anchor="start">2011</text>
+              <text class="range__point" x="10%" y="14" text-anchor="middle">2012</text>
+              <text class="range__point" x="20%" y="14" text-anchor="middle">2013</text>
+              <text class="range__point" x="30%" y="14" text-anchor="middle">2014</text>
+              <text class="range__point" x="40%" y="14" text-anchor="middle">2015</text>
+              <text class="range__point" x="50%" y="14" text-anchor="middle">2016</text>
+              <text class="range__point" x="60%" y="14" text-anchor="middle">2017</text>
+              <text class="range__point" x="70%" y="14" text-anchor="middle">2018</text>
+              <text class="range__point" x="80%" y="14" text-anchor="middle">2019</text>
+              <text class="range__point" x="90%" y="14" text-anchor="middle">2020</text>
+              <text class="range__point" x="100%" y="14" text-anchor="end">2021</text>
+          </svg>
+      </fieldset>
+        <button class="button" id="button1" value="dustd" style="background-color: red;" >Dust</button>
+        <button class="button" id="button2" value="nitrogenn">Nitrogen</button>
+        <button class="button" id="button3" value="ozoneo">Ozone</button>
+        <button class="button" id="button4" value="sulphures">Sulphure</button>
+      </div>
+
+      <div class="slidecontainer" id="slidecontainer2" style="display:none">        
+        <p>Show a difference in years:</p>
+        <button class="button" id="button" value="2014">2014</button>
+        <button class="button" id="button" value="2017">2017</button>
+        <button class="button" id="button" value="2020">2020</button>
+      </div>
+      <br>
+      <div class="slidecontainer" id="slidecontainer3" style="display:none">      
+        <p>Blank spots means no data</p>  
+        </div>
+        <div class="slidecontainer" id="slidecontainer4" style="display:none">        
+          <p>Choose a month from 2021:</p>
+          <fieldset class="range__field">
+            <input class="range" id ="range2" type="range" min="1" max="12" value="1" step="1">
+            <svg role="presentation" width="99%" height="10" xmlns="http://www.w3.org/2000/svg">
+                <rect class="range__tick" x="0%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="9%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="18%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="27%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="36%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="45%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="54%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="63%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="72%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="81%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="90%" y="3" width="1" height="10"></rect>
+                <rect class="range__tick" x="100%" y="3" width="1" height="10"></rect>
+            </svg>
+            <svg role="presentation" width="100%" height="17" xmlns="http://www.w3.org/2000/svg">
+                <text class="range__point" x="0%" y="14" text-anchor="start">Jan</text>
+                <text class="range__point" x="9%" y="14" text-anchor="middle">Feb</text>
+                <text class="range__point" x="18%" y="14" text-anchor="middle">Mar</text>
+                <text class="range__point" x="27%" y="14" text-anchor="middle">Apr</text>
+                <text class="range__point" x="36%" y="14" text-anchor="middle">May</text>
+                <text class="range__point" x="45%" y="14" text-anchor="middle">Jun</text>
+                <text class="range__point" x="54%" y="14" text-anchor="middle">Jul</text>
+                <text class="range__point" x="63%" y="14" text-anchor="middle">Aug</text>
+                <text class="range__point" x="72%" y="14" text-anchor="middle">Sep</text>
+                <text class="range__point" x="81%" y="14" text-anchor="middle">Oct</text>
+                <text class="range__point" x="90%" y="14" text-anchor="middle">Nov</text>
+                <text class="range__point" x="100%" y="14" text-anchor="end">Dec</text>
+            </svg>
+          </fieldset>
+          </div>
+      <div class="map-wrapper">
+        <div id="map"></div>
+      </div>
+
+    </body>
+</html>
