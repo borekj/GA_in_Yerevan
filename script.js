@@ -1,6 +1,6 @@
 let year = 2011
 let pollutant = "geonode:dustd"
-let change, air, greenbegin, greenar, bla, uri, sentinelHub, actual, month
+let change, air, greenbegin, greenar, bla, uri, sentinelHub, actual, month, density
 
 var slider = document.getElementById("range");
 
@@ -113,6 +113,33 @@ function ga() {
 	if (greenar) {greenAreas()}
 }
 
+function density2() {
+	MAP.setView(new L.LatLng(40.18, 44.499711), 11);
+	deleteLegend()
+	document.getElementById("slidecontainer").style.display = "none";
+	document.getElementById("slidecontainer2").style.display = "none";
+	document.getElementById("slidecontainer3").style.display = "none";
+	document.getElementById("slidecontainer4").style.display = "none";
+	MAP.eachLayer(function (layer) {
+        MAP.removeLayer(layer);
+    });
+	OSM = L.tileLayer(URL_OSM, {
+		opacity: 0.5
+	});
+	MAP.addLayer(OSM);
+	density = L.tileLayer.wms('http://vgse.geology.am/geoserver/geonode/wms?', {
+		layers:"geonode:districts",
+		transparent: true,
+		format: 'image/png',
+		maxcc:20, 
+ 	 	minZoom:1, 
+ 	 	maxZoom:20, 
+	})
+	MAP.addLayer(density)
+	uri = "./density.png"
+	L.wmsLegend(uri);
+}
+
 function no() {
 	document.getElementById("slidecontainer").style.display = "none";
 	document.getElementById("slidecontainer2").style.display = "none";
@@ -127,20 +154,20 @@ function no() {
 		opacity: 1
 	});
 	MAP.addLayer(OSM);
-	let baseUrl = "https://creodias.sentinel-hub.com/ogc/wms/14cc4f73-4193-41de-b30a-9fd4df139ee7";
-	sentinelHub = L.tileLayer.wms(baseUrl, {
-		tileSize: 512,
-		attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
-						   urlProcessingApi:"https://creodias.sentinel-hub.com/ogc/wms/f9f27612-5c05-4d61-892e-78d50790da0e", 
-						maxcc:20, 
-						minZoom:6, 
-						maxZoom:16, 
-						preset:"NO2", 
-						layers:"NO2", 
-						time:"2021-06-01/2021-12-12", 
-						transparent:"true",
-						format:"image/png",
-	});
+	let baseUrl = " https://creodias.sentinel-hub.com/ogc/wms/a383b8d8-52dd-4976-8d26-3d80bf28843a";
+let sentinelHub = L.tileLayer.wms(baseUrl, {
+    tileSize: 512,
+    attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
+    	 	 	 	urlProcessingApi:" https://creodias.sentinel-hub.com/ogc/wms/f9f27612-5c05-4d61-892e-78d50790da0e", 
+ 	 	 	 	maxcc:20, 
+ 	 	 	 	minZoom:1, 
+ 	 	 	 	maxZoom:16, 
+ 	 	 	 	preset:"NOO", 
+ 	 	 	 	layers:"NOO", 
+				transparent: true,
+				opacity: 0.6
+
+});
 	uri = "./nitrogen_legend.png"
 	L.wmsLegend(uri);
 	MAP.addLayer(sentinelHub)
@@ -162,20 +189,20 @@ function so() {
 		opacity: 1
 	});
 	MAP.addLayer(OSM);
-	let baseUrl = "https://creodias.sentinel-hub.com/ogc/wms/8312c2fb-507a-448d-a7fe-1ce8f3677a9a";
-	sentinelHub = L.tileLayer.wms(baseUrl, {
-    tileSize: 512,
-    attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
-    	 	 	 	urlProcessingApi:"https://creodias.sentinel-hub.com/ogc/wms/f9f27612-5c05-4d61-892e-78d50790da0e", 
- 	 	 	 	maxcc:20, 
- 	 	 	 	minZoom:1, 
- 	 	 	 	maxZoom:20, 
- 	 	 	 	preset:"SO2", 
- 	 	 	 	layers:"SO2", 
- 	 	 	 	time:"2021-05-01/2021-11-11", 
-				transparent:"true",
-				format:"image/png",
-		});
+	let baseUrl = " https://creodias.sentinel-hub.com/ogc/wms/a383b8d8-52dd-4976-8d26-3d80bf28843a";
+	let sentinelHub = L.tileLayer.wms(baseUrl, {
+		tileSize: 512,
+		attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
+						   urlProcessingApi:" https://creodias.sentinel-hub.com/ogc/wms/f9f27612-5c05-4d61-892e-78d50790da0e", 
+						maxcc:20, 
+						minZoom:1, 
+						maxZoom:16, 
+						preset:"SOO", 
+						layers:"SOO", 
+					transparent: true,
+					opacity: 0.6
+	
+	});
 	uri = "./sulphure_legend.png"
 	L.wmsLegend(uri);
 	MAP.addLayer(sentinelHub)
@@ -195,7 +222,7 @@ function ndvi() {
 		opacity: 1
 	});
 	MAP.addLayer(OSM);
-	let baseUrl = "https://services.sentinel-hub.com/ogc/wms/a16a53eb-de1f-4752-a07f-f93695b3c356";
+	let baseUrl = "https://services.sentinel-hub.com/ogc/wms/e67c2c68-acb2-4341-8b5a-0a3563ec9477";
 	let sentinelHub = L.tileLayer.wms(baseUrl, {
     tileSize: 512,
     attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
@@ -203,8 +230,8 @@ function ndvi() {
  	 	 	 	maxcc:20, 
  	 	 	 	minZoom:6, 
  	 	 	 	maxZoom:16, 
- 	 	 	 	preset:"NDVI", 
- 	 	 	 	layers:"NDVI", 
+ 	 	 	 	preset:"NDVI2", 
+ 	 	 	 	layers:"NDVI2", 
  	 	 	 	time:"2021-11-01/2021-12-13", 
 
 });
@@ -263,7 +290,7 @@ function ndvi2() {
 	MAP.eachLayer(function (layer) {
         MAP.removeLayer(layer);
     });
-	let baseUrl = "https://services.sentinel-hub.com/ogc/wms/a16a53eb-de1f-4752-a07f-f93695b3c356";
+	let baseUrl = "https://services.sentinel-hub.com/ogc/wms/e67c2c68-acb2-4341-8b5a-0a3563ec9477";
 	sentinelHub = L.tileLayer.wms(baseUrl, {
     tileSize: 512,
     attribution: '&copy; <a href="http://www.sentinel-hub.com/" target="_blank">Sentinel Hub</a>',
@@ -271,8 +298,8 @@ function ndvi2() {
  	 	 	 	maxcc:80, 
  	 	 	 	minZoom:1, 
  	 	 	 	maxZoom:20, 
- 	 	 	 	preset:"NDVI", 
- 	 	 	 	layers:"NDVI", 
+ 	 	 	 	preset:"NDVI2", 
+ 	 	 	 	layers:"NDVI2", 
  	 	 	 	time:month, 
 				priority:"leastCC"
 	});
