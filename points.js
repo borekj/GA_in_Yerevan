@@ -27,7 +27,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "green",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/eastern.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/eastern.png"
             },
         },
 		{
@@ -41,7 +41,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "green",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/genocide.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/genocide.png"
             },
         },
 		{
@@ -55,7 +55,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "red",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/hexagon.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/hexagon.png"
             },
         },
 		{
@@ -69,7 +69,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "red",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/airport.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/airport.png"
             },
         },
         {
@@ -83,7 +83,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "red",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/desert.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/desert.png"
             },
         },
         {
@@ -97,7 +97,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "green",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/cascade.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/cascade.png"
             },
         },
         {
@@ -111,7 +111,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "red",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/east2.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/east2.png"
             },
         },
     ]
