@@ -13,7 +13,7 @@ var examples = {
             "type": "Feature",
             "properties": {
 				"colour": "green",
-				"source": "C:/Users/janbo/OneDrive/Plocha/projekt/web/avan.png"
+				"source": "https://raw.githubusercontent.com/borekj/GA_in_Yerevan/main/avan.png"
             },
         },
 		{
